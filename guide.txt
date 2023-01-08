@@ -1,0 +1,11 @@
+1. Check the number of arguments
+2. Check the extension of the map, should be .ber
+3. Read the map file using get_next_line
+4. Check if the map is rectangular
+5. Check if the map contains the characters
+6. Check if the map is closed
+7. Check if there’s a valid path in the map
+==========================================================
+A. Render the map on the window using mlx_put_image_window
+B. Interact with the keyboard (move the player)
+C. Close the game in a clean way
