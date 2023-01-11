@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 08:38:24 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/01/08 11:30:58 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/01/09 23:01:56 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char *ft_call_strjoin(char *s1, char *s2)
 static void ft_check_map_lines(const char *line)
 {
 	static int first_line;
-	
+
 	if (first_line == 0)
 		first_line = (int)ft_strlen_pro(line, '\n');
 	if (first_line != ft_strlen_pro(line, '\n'))

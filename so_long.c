@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 21:15:19 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/01/08 11:26:03 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/01/11 11:05:38 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,14 @@ static int ft_ber_checker(const char *map_path)
 
 static void ft_run_solong(const char *map_path)
 {
+	char **map;
 	t_gameinfo game_data;
-	
+
 	if (ft_ber_checker(map_path) == 0)
 		ft_show_error("The map extension is not valid!");
-	game_data.map = ft_read_map(map_path);
+	map = ft_read_map(map_path);
+	ft_map_validator((const char **)map);
+	//ft_struct_initializer(&game_data, map);
 }
 
 int	main(int argc, char **argv)

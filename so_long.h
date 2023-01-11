@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 22:40:52 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/01/08 09:16:39 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/01/11 11:12:51 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,13 @@
 typedef struct s_gameinfo
 {
 	char **map;
-	int walls;
-	int space;
-	int collec;
-	int exit;
-	int player;
 } t_gameinfo;
 
 char **ft_read_map(const char *path);
-int ft_map_validator(char **map);
+void ft_map_validator(const char **map);
 void ft_show_error(const char *msg);
+void ft_struct_initializer(t_gameinfo *game_data, char **map);
+int ft_serach_tab(const char **tab, char c);
+int ft_tab_size(const char **tab);
 
 #endif
