@@ -9,3 +9,5 @@
 A. Render the map on the window using mlx_put_image_window
 B. Interact with the keyboard (move the player)
 C. Close the game in a clean way
+==========================================================
+[+] Protect the textures (file_to_image mlx function !)

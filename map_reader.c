@@ -6,16 +6,16 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 08:38:24 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/01/09 23:01:56 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/01/15 01:38:02 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static char *ft_call_strjoin(char *s1, char *s2)
+static char	*ft_call_strjoin(char *s1, char *s2)
 {
-	char *result;
-	
+	char	*result;
+
 	if (!s1)
 		s1 = ft_strdup("");
 	result = ft_strjoin(s1, s2);
@@ -23,22 +23,22 @@ static char *ft_call_strjoin(char *s1, char *s2)
 	return (result);
 }
 
-static void ft_check_map_lines(const char *line)
+static void	ft_check_map_lines(const char *line)
 {
-	static int first_line;
+	static int	first_line;
 
 	if (first_line == 0)
 		first_line = (int)ft_strlen_pro(line, '\n');
-	if (first_line != ft_strlen_pro(line, '\n'))
-		ft_show_error("The map isn't in shape, please check it before you run the game!");
+	if (line[0] == '\n' || first_line != ft_strlen_pro(line, '\n'))
+		ft_show_error("The map isn't in shape!");
 }
 
-char **ft_read_map(const char *path)
+char	**ft_read_map(const char *path)
 {
-	int fd;
-	char *curr_line;
-	char *map_content;
-	char **map_tab;
+	int		fd;
+	char	*curr_line;
+	char	*map_content;
+	char	**map_tab;
 
 	if (!path || *path == '\0')
 		return (NULL);

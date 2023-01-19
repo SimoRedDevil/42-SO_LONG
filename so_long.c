@@ -6,38 +6,66 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 21:15:19 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/01/11 11:05:38 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/01/18 18:33:46 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int ft_ber_checker(const char *map_path)
+static int	ft_ber_checker(const char *map_path)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map_path[i])
 	{
-		if (map_path[i] == '.' 
-			&& map_path[i + 1] == 'b' && map_path[i + 2] == 'e'
-			&& map_path[i + 3] == 'r' && map_path[i + 4] == '\0')
+		if (map_path[i] == '.' && map_path[i + 1] == 'b'
+			&& map_path[i + 2] == 'e' && map_path[i + 3] == 'r'
+			&& map_path[i + 4] == '\0')
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-static void ft_run_solong(const char *map_path)
+static int	ft_close_game(t_gameinfo *g_data)
 {
-	char **map;
-	t_gameinfo game_data;
+	mlx_destroy_window(g_data->mlx_p, g_data->mlx_w);
+	exit(0);
+}
+
+static int	ft_hook_handler(int keycode, t_gameinfo *g_data)
+{
+	if (keycode == 53)
+		ft_close_game(g_data);
+	if (keycode == KEY_A || keycode == KEY_ARROW_LEFT
+		|| keycode == KEY_D || keycode == KEY_ARROW_RIGHT
+		|| keycode == KEY_S || keycode == KEY_ARROW_DOWN
+		|| keycode == KEY_W || keycode == KEY_ARROW_UP)
+	{
+		ft_destory_images(g_data);
+		ft_move_player(keycode, g_data);
+		ft_load_images(g_data);
+		ft_draw_characters(g_data);
+	}
+	return (1);
+}
+
+static void	ft_run_solong(const char *map_path)
+{
+	char		**map;
+	t_gameinfo	g_data;
 
 	if (ft_ber_checker(map_path) == 0)
 		ft_show_error("The map extension is not valid!");
 	map = ft_read_map(map_path);
 	ft_map_validator((const char **)map);
-	//ft_struct_initializer(&game_data, map);
+	g_data.map = map;
+	ft_struct_initializer(&g_data);
+	ft_draw_characters(&g_data);
+	mlx_hook(g_data.mlx_w, KEYPRESS, KEYPRESSMASK, ft_hook_handler, &g_data);
+	mlx_hook(g_data.mlx_w, 17, 0, ft_close_game, &g_data);
+	mlx_loop(g_data.mlx_p);
 }
 
 int	main(int argc, char **argv)
