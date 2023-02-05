@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 22:40:52 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/01/18 20:16:55 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/02/02 18:49:22 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "ft_printf/ft_printf.h"
 # include "get_next_line/get_next_line.h"
 
-# define KEYPRESSMASK 1
 # define KEYPRESS 2
 # define KEY_A 0
 # define KEY_S 1
@@ -64,7 +63,6 @@ typedef struct s_gameinfo
 int		ft_put_image(t_gameinfo *g_data, void *img, int x, int y);
 void	*ft_xpm2image(void *mlx_p, char *xpm);
 void	*ft_new_window(t_gameinfo *g_data);
-
 char	**ft_read_map(const char *path);
 int		ft_count_collect(const char **map);
 void	ft_map_validator(const char **map);
@@ -78,5 +76,9 @@ void	ft_draw_characters(t_gameinfo *g_data);
 void	ft_move_player(int keycode, t_gameinfo *g_data);
 void	ft_collect(t_gameinfo *g_data);
 void	ft_finish_game(t_gameinfo *g_data);
+void	ft_flood_fill(char **map, int x, int y);
+void	ft_check_validpath(const char **map);
+char	**ft_create_fakemap(const char **map);
+int		*ft_choose_xy(const char **map);
 
 #endif

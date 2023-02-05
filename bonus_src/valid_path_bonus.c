@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   valid_path.c                                       :+:      :+:    :+:   */
+/*   valid_path_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/19 13:10:37 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/02/04 14:20:40 by mel-yous         ###   ########.fr       */
+/*   Created: 2023/02/01 19:34:59 by mel-yous          #+#    #+#             */
+/*   Updated: 2023/02/04 14:22:18 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
-int	*ft_choose_xy(const char **map)
+int	*ft_choose_xy(const char **m)
 {
 	int			x;
 	int			y;
@@ -22,12 +22,12 @@ int	*ft_choose_xy(const char **map)
 	xy = (int *)ft_calloc(2, sizeof(int));
 	if (!xy)
 		ft_show_error("Allocation of the fake map failed!");
-	while (map[y])
+	while (m[y])
 	{
 		x = 0;
-		while (map[y][x])
+		while (m[y][x])
 		{
-			if (map[y][x] == 'P')
+			if (m[y][x] == 'P')
 			{
 				xy[0] = x;
 				xy[1] = y;

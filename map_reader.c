@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 08:38:24 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/01/15 01:38:02 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/02/03 14:43:36 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	ft_check_map_lines(const char *line)
 
 	if (first_line == 0)
 		first_line = (int)ft_strlen_pro(line, '\n');
-	if (line[0] == '\n' || first_line != ft_strlen_pro(line, '\n'))
+	if (first_line != (int)ft_strlen_pro(line, '\n'))
 		ft_show_error("The map isn't in shape!");
 }
 
@@ -40,12 +40,12 @@ char	**ft_read_map(const char *path)
 	char	*map_content;
 	char	**map_tab;
 
-	if (!path || *path == '\0')
-		return (NULL);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
 	curr_line = get_next_line(fd);
+	if (curr_line && *curr_line == '\n')
+		ft_show_error("The map isn't in shape!");
 	map_content = NULL;
 	while (curr_line)
 	{

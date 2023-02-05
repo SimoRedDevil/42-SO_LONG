@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 21:15:19 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/01/18 18:33:46 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/02/03 14:26:23 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_ber_checker(const char *map_path)
 	i = 0;
 	while (map_path[i])
 	{
-		if (map_path[i] == '.' && map_path[i + 1] == 'b'
+		if (map_path[i] == '.' && map_path[i - 1] && map_path[i + 1] == 'b'
 			&& map_path[i + 2] == 'e' && map_path[i + 3] == 'r'
 			&& map_path[i + 4] == '\0')
 			return (1);
@@ -54,16 +54,22 @@ static int	ft_hook_handler(int keycode, t_gameinfo *g_data)
 static void	ft_run_solong(const char *map_path)
 {
 	char		**map;
+	char		**fake_map;
 	t_gameinfo	g_data;
+	int			*xy;
 
 	if (ft_ber_checker(map_path) == 0)
 		ft_show_error("The map extension is not valid!");
 	map = ft_read_map(map_path);
 	ft_map_validator((const char **)map);
+	fake_map = ft_create_fakemap((const char **)map);
+	xy = ft_choose_xy((const char **)fake_map);
+	ft_flood_fill(fake_map, xy[0], xy[1]);
+	ft_check_validpath((const char **)fake_map);
 	g_data.map = map;
 	ft_struct_initializer(&g_data);
 	ft_draw_characters(&g_data);
-	mlx_hook(g_data.mlx_w, KEYPRESS, KEYPRESSMASK, ft_hook_handler, &g_data);
+	mlx_hook(g_data.mlx_w, KEYPRESS, 0, ft_hook_handler, &g_data);
 	mlx_hook(g_data.mlx_w, 17, 0, ft_close_game, &g_data);
 	mlx_loop(g_data.mlx_p);
 }
